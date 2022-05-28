@@ -10,13 +10,14 @@ import {
 
 export class CreateUserDto {
   @ApiProperty()
-  @IsOptional()
-  @IsUrl()
-  avatar?: string;
-
   @ApiProperty()
   @IsNotEmpty()
-  name: string;
+  first_name: string;
+
+  @ApiProperty()
+  @IsOptional()
+  last_name: string;
+
 
   @ApiProperty()
   @IsNotEmpty()
@@ -24,22 +25,22 @@ export class CreateUserDto {
   email: string;
 
   @ApiProperty()
+  @IsOptional()
+  phone: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  expertise: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  certificate_no: string;
+
+  @ApiProperty()
   @MinLength(6)
   password: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  address: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  country: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  date_of_birth: DOB;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  gender: string;
+  // @ApiProperty()
+  // @IsOptional()
+  // is_verified: string;
 }

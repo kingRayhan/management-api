@@ -39,8 +39,8 @@ export class AuthService {
 
     if (!marched) throw new UnauthorizedException('Invalid credentials');
 
-    if (!user.is_verified)
-      throw new NotAcceptableException('Please Verify Your Email');
+    // if (!user.is_verified)
+    //   throw new NotAcceptableException('Please Verify Your Email');
 
     const token = await this.sessionService.createSession(user._id);
     return token;
@@ -69,19 +69,5 @@ export class AuthService {
     return bcrypt.compareSync(password, hash);
   }
 
-  forgotOTPGenerate(data) {
-    return this.userService.generateForgotOtp(data);
-  }
 
-  resetPassword(data) {
-    return this.userService.resetPassword(data);
-  }
-
-  otpGenerate(data) {
-    return this.userService.generateOtp(data);
-  }
-
-  verifyOTP(data) {
-    return this.userService.validateOtp(data);
-  }
 }

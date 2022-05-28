@@ -16,10 +16,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDTO } from './dto/login.dto';
-import { OTPDto } from './dto/otp.dto';
 import { RegisterDTO } from './dto/register.dto';
-import { ResetPasswordDto } from './dto/reset.dto';
-import { ValidateOTPDto } from './dto/validate-otp.dto';
 import { Throttle } from '@nestjs/throttler';
 
 @ApiTags('Authentication')
@@ -89,54 +86,4 @@ export class AuthController {
     });
   }
 
-  @Post('forgot-password')
-  @HttpCode(HttpStatus.OK)
-  @Throttle(5, 60)
-  async generateForgotPasswordOTP(@Body() data: OTPDto) {
-    await this.authService.forgotOTPGenerate(data);
-    return new Response({
-      status: HttpStatus.OK,
-      message: 'An OTP has been sent to your email',
-      errors: null,
-      data: null,
-    });
-  }
-
-  @Post('reset-password')
-  @HttpCode(HttpStatus.OK)
-  @Throttle(5, 60)
-  async resetPassword(@Body() dto: ResetPasswordDto) {
-    await this.authService.resetPassword(dto);
-    return new Response({
-      status: HttpStatus.OK,
-      message: 'Password reset successfully',
-      errors: null,
-      data: null,
-    });
-  }
-
-  @Post('otp')
-  @HttpCode(HttpStatus.OK)
-  @Throttle(5, 60)
-  async generateOtp(@Body() data: OTPDto) {
-    await this.authService.otpGenerate(data);
-    return new Response({
-      status: HttpStatus.OK,
-      message: 'An OTP has been sent to your email',
-      errors: null,
-      data: null,
-    });
-  }
-
-  @Post('verify-otp')
-  @Throttle(5, 60)
-  async verifyOTP(@Body() data: ValidateOTPDto) {
-    await this.authService.verifyOTP(data);
-    return new Response({
-      status: HttpStatus.OK,
-      message: 'OTP verified successfully',
-      errors: null,
-      data: null,
-    });
-  }
 }

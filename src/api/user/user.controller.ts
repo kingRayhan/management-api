@@ -5,6 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Patch,
+  Query,
   Req,
   UseInterceptors,
 } from '@nestjs/common';
@@ -12,16 +13,15 @@ import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Authenticated } from '@/common/decorators/authenticated.decorator';
 import { Request } from 'express';
-import { PrivacyDto } from './dto/privacy.dto';
-import { NotificationDto } from './dto/notification.dto';
+
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PasswordDto } from './dto/update-password.dto';
 import Response from '@/common/helper/Response';
 import { Throttle } from '@nestjs/throttler';
 import { ResponseMessage } from '@/common/strings/response-message';
 
-@Controller('users')
-@ApiTags('Users')
+@Controller('doctors')
+@ApiTags('Doctor')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -41,31 +41,7 @@ export class UserController {
     });
   }
 
-  @Patch('settings/privacy')
-  @Throttle(10, 60)
-  @Authenticated()
-  updateUserPrivacySettings(
-    @Req() req: Request,
-    @Body() privacyDTO: PrivacyDto,
-  ) {
-    return this.userService.updateUserPrivacySettings(
-      req['user']['userId'],
-      privacyDTO,
-    );
-  }
 
-  @Patch('settings/notification')
-  @Throttle(10, 60)
-  @Authenticated()
-  updateUserNotificationSettings(
-    @Req() req: Request,
-    @Body() notificationDTO: NotificationDto,
-  ) {
-    return this.userService.updateUserNotificationSettings(
-      req['user']['userId'],
-      notificationDTO,
-    );
-  }
 
   @Patch('settings/profile')
   @Throttle(10, 60)
@@ -85,7 +61,7 @@ export class UserController {
   }
 
   @Get('profile/:id')
-  getPublicProfile() {
-    return "I'm the public profile";
+  getPublicProfile(@Query('id') id : string) {
+    return this.userService.findById(id)
   }
 }
