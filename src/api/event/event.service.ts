@@ -1,4 +1,5 @@
 import DatabaseRepository from '@/common/database/database-repo';
+import { CommonListQueryDto } from '@/common/dtos/pagination.dto';
 import { Injectable } from '@nestjs/common';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { InjectModel } from 'nestjs-typegoose';
@@ -22,19 +23,34 @@ export class EventService {
     return await this.model.create({...createEventDto, ...{user: user_id}})
   }
 
-  findAll() {
-    return `This action returns all event`;
+  findAll(query: CommonListQueryDto, id: string) {
+    return this.databaseRepository.getObjectList(query,{
+      user: id
+    },{
+      path: 'user',
+      select: '-password -permissions -is_verified'
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} event`;
+  findAllPublic(query: CommonListQueryDto) {
+    return this.databaseRepository.getObjectListPublic(query,{
+      path: 'user',
+      select: '-password -permissions -is_verified'
+    });
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  findOne(id: string) {
+    return this.databaseRepository.getObject({_id: id},{
+      path: 'user',
+      select: '-password -permissions -is_verified'
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+  update(id: string, updateEventDto: UpdateEventDto) {
+    return this.databaseRepository.updateObject({id}, updateEventDto);
+  }
+
+  remove(id: string) {
+    return this.databaseRepository.deleteObject({id});
   }
 }

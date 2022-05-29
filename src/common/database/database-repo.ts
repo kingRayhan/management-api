@@ -9,6 +9,43 @@ import { aggregateQuerystring } from './aggregate-querystring';
 export default class DatabaseRepository<ModelRef> {
   constructor(private readonly model: Model<ModelRef>) {}
 
+
+
+   /**
+   * Get all objects from the database with pagination
+   * @param filter - The filter to use to find the resource
+   * @param populateOptions
+   * @returns Promise<PaginatedResource<ModelRef>>
+   */
+    async getObjectListPublic(
+      query: CommonListQueryDto,
+      populateOptions?: any,
+    ): Promise<PaginatedResource<ModelRef>> {
+      const page = Number(query.page) || 1;
+      const limit = Number(query.limit) || 10;
+      const sort = query.sort || '-createdAt';
+
+  
+      
+  
+      const count = await this.model.countDocuments();
+  
+      const contents = await this.model
+        .find()
+        .select(query.fields)
+        .populate(populateOptions)
+        .sort(sort)
+        .skip((page - 1) * limit)
+        .limit(limit);
+  
+      return {
+        currentPage: page,
+        pageCount: Math.ceil(count / limit),
+        count,
+        contents,
+      };
+    }
+
   /**
    * Get all objects from the database with pagination
    * @param filter - The filter to use to find the resource
@@ -26,7 +63,7 @@ export default class DatabaseRepository<ModelRef> {
     const formattedFilterFromQueryString = mongodbFilterQuerystrings(query);
     const formattedAggregateQuerystring = aggregateQuerystring(query);
 
-    console.log(formattedAggregateQuerystring);
+    
 
     const count = await this.model.countDocuments({
       ...omit(findArgs, ['filter', 'aggregate']),
@@ -39,7 +76,7 @@ export default class DatabaseRepository<ModelRef> {
         ...formattedFilterFromQueryString,
       })
       .select(query.fields)
-      .populate(formattedAggregateQuerystring)
+      .populate(populateOptions)
       .sort(sort)
       .skip((page - 1) * limit)
       .limit(limit);
@@ -55,7 +92,7 @@ export default class DatabaseRepository<ModelRef> {
   async getObject(filter?: FilterQuery<ModelRef>, populateOptions?: any) {
     const count = await this.model.countDocuments(filter);
     if (count === 0) throw new NotFoundException('Resource not found');
-    return this.model.findOne(filter).populate(populateOptions);
+    return this.model.findOne(filter).populate(populateOptions)
   }
 
   async updateObject(filter: FilterQuery<ModelRef>, payload: any) {
