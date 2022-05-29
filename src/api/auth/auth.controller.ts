@@ -18,6 +18,7 @@ import { AuthService } from './auth.service';
 import { LoginDTO } from './dto/login.dto';
 import { RegisterDTO } from './dto/register.dto';
 import { Throttle } from '@nestjs/throttler';
+import { AdminDto } from './dto/admin-register.dto';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -25,6 +26,23 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService
   ) {}
+
+
+  @Post('admin/register')
+  @Throttle(5, 60)
+  @HttpCode(HttpStatus.OK)
+  async adminRegister(@Body() dto: AdminDto) {
+    const data = await this.authService.adminRegister(dto);
+
+
+    return new Response({
+      status: HttpStatus.OK,
+      data,
+      message: 'Register successfully',
+      errors: null,
+    });
+  }
+
 
   @Post('register')
   @Throttle(5, 60)

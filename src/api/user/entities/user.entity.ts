@@ -24,7 +24,7 @@ import * as UniqueValidator from 'mongoose-unique-validator';
 @Pre<User>('save', function () {
   this.password = hashSync(this.password, 10);
 
- // this.permissions = [Permission.UPDATE_PRIVACY_SETTINGS, Permission.UPDATE_NOTIFICATION_SETTINGS, Permission.UPDATE_PROFILE, Permission.UPDATE_PASSWORD, Permission.CREATE_ARTICLE, Permission.UPDATE_ARTICLE, Permission.DELETE_ARTICLE, Permission.CREATE_VIDEO, Permission.DELETE_VIDEO, Permission.UPDATE_VIDEO, Permission.CREATE_AUDIO, Permission.UPDATE_AUDIO, Permission.DELETE_AUDIO, Permission.POST_COMMENT, Permission.DELETE_COMMENT, Permission.UPDATE_COMMENT, Permission.FETCH_NOTIFICATION, Permission.GET_WALLET]
+ // this.permissions = [ Permission.ADMINISTRATOR]
 
 })
 @plugin(UniqueValidator, { message: '{PATH} must need to be unique.' })
@@ -43,10 +43,10 @@ export class User {
   @prop({ required: false, unique: false })
   phone: string;
 
-  @prop({ required: true })
+  @prop({ required: false })
   expertise: string;
 
-  @prop({ required: true })
+  @prop({ required: false })
   certificate_no: string;
 
   @prop({ required: true })

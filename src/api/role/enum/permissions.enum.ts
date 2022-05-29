@@ -1,39 +1,17 @@
 export enum UserRolePermissions {
-  UPDATE_PRIVACY_SETTINGS = 'UPDATE_PRIVACY_SETTINGS',
-  UPDATE_NOTIFICATION_SETTINGS = 'UPDATE_NOTIFICATION_SETTINGS',
-  UPDATE_PROFILE = 'UPDATE_PROFILE',
-  UPDATE_PASSWORD = 'UPDATE_PASSWORD',
 
   // article
   CREATE_ARTICLE = 'CREATE_ARTICLE',
   UPDATE_ARTICLE = 'UPDATE_ARTICLE',
   DELETE_ARTICLE = 'DELETE_ARTICLE',
 
-  // videos
-  CREATE_VIDEO = 'CREATE_VIDEO',
-  DELETE_VIDEO = 'DELETE_VIDEO',
-  UPDATE_VIDEO = 'UPDATE_VIDEO',
-
-  // audios
-  CREATE_AUDIO = 'CREATE_AUDIO',
-  DELETE_AUDIO = 'DELETE_AUDIO',
-  UPDATE_AUDIO = 'UPDATE_AUDIO',
 
   // comment
   POST_COMMENT = 'POST_COMMENT',
   DELETE_COMMENT = 'DELETE_COMMENT',
   UPDATE_COMMENT = 'UPDATE_COMMENT',
 
-  // Notification
-  FETCH_NOTIFICATION = 'FETCH_NOTIFICATION',
 
-  // Wallet
-  GET_WALLET = 'GET_WALLET',
-
-  // category
-  CREATE_CATEGORY = 'CREATE_CATEGORY',
-  DELETE_CATEGORY = 'DELETE_CATEGORY',
-  UPDATE_CATEGORY = 'UPDATE_CATEGORY',
 }
 
 export enum AdminRolePermissions {
@@ -42,8 +20,8 @@ export enum AdminRolePermissions {
 }
 
 export const Permission = {
-  ...UserRolePermissions,
   ...AdminRolePermissions,
+  ...UserRolePermissions,
 };
 
 export type Permission = keyof typeof Permission;
