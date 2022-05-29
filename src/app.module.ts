@@ -8,6 +8,7 @@ import { SessionModule } from './api/session/session.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { AdminModule } from './api/admin/admin.module';
+import { EventModule } from './api/event/event.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { AdminModule } from './api/admin/admin.module';
     UserModule,
    // RoleModule,
     SessionModule,
-   AdminModule
+   AdminModule,
+   EventModule
   ],
   controllers: [AppController],
   providers: [],

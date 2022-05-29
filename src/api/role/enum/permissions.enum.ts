@@ -17,6 +17,7 @@ export enum UserRolePermissions {
 export enum AdminRolePermissions {
   ADMINISTRATOR = 'ADMINISTRATOR',
   MANAGE_ROLE_AND_PERMISSION = 'MANAGE_ROLE_AND_PERMISSION',
+  DOCTOR="DOCTOR"
 }
 
 export const Permission = {
