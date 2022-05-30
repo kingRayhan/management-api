@@ -7,6 +7,7 @@ import { Request } from 'express';
 import { Role } from '@/common/decorators/Role.decorator';
 import { Permission } from '../role/enum/permissions.enum';
 import { CommonListQueryDto } from '@/common/dtos/pagination.dto';
+import { JoinEventDto } from './dto/join-event.dto';
 
 @Controller('event')
 @ApiTags('Event')
@@ -23,6 +24,20 @@ export class EventController {
       data
     }
   }
+
+
+
+  @Post('join')
+  @Role([Permission.USER])
+  async join_event(@Body() joinEventDto: JoinEventDto, @Req() req: Request) {
+    const data = await this.eventService.JoinEvent(joinEventDto, req['user']['userId']);
+
+    return {
+      message: 'Event Create Successfully',
+      data
+    }
+  }
+
 
   @Get()
   @Role([Permission.DOCTOR])

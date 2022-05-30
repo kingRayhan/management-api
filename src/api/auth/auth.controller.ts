@@ -43,6 +43,21 @@ export class AuthController {
     });
   }
 
+  @Post('user/register')
+  @Throttle(5, 60)
+  @HttpCode(HttpStatus.OK)
+  async userRegister(@Body() dto: AdminDto) {
+    const data = await this.authService.adminRegister(dto);
+
+
+    return new Response({
+      status: HttpStatus.OK,
+      data,
+      message: 'Register successfully',
+      errors: null,
+    });
+  }
+
 
   @Post('register')
   @Throttle(5, 60)
