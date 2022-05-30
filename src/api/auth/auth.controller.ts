@@ -59,7 +59,7 @@ export class AuthController {
   }
 
 
-  @Post('register')
+  @Post('doctor/register')
   @Throttle(5, 60)
   @HttpCode(HttpStatus.OK)
   async register(@Body() dto: RegisterDTO) {
