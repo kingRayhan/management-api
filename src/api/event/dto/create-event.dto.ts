@@ -9,15 +9,6 @@ import {
     MinLength,
 } from 'class-validator';
 
-export class Status {
-    @ApiProperty()
-    @IsNotEmpty()
-    type: string;
-
-    @ApiProperty()
-    @IsOptional()
-    issue: string;
-}
 
 export class EventDate {
     @ApiProperty()
@@ -51,7 +42,7 @@ export class CreateEventDto {
 
     @ApiProperty()
     @IsNotEmpty()
-    status: Status;
+    type: string;
 
     @ApiProperty()
     @IsNotEmpty()

@@ -12,6 +12,27 @@ import {
 
 export class JoinEventDto {
     @ApiProperty()
+    @IsEmail()
     @IsNotEmpty()
-    event: string;
+    email: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    phone: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    first_name: string;
+
+    @ApiProperty()
+    @IsOptional()
+    last_name: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    age: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    type: string;
 }

@@ -3,13 +3,7 @@
 import { User } from '@/api/user/entities/user.entity';
 import { index, ModelOptions, plugin, Prop, Ref } from '@typegoose/typegoose';
 
-export class Status {
-    @Prop({ required: true })
-    type: string;
 
-    @Prop({ required: true })
-    issue: string;
-}
 
 export class EventDate {
     @Prop({ required: true })
@@ -42,7 +36,7 @@ export class Event {
     location: string;
 
     @Prop({ required: true })
-    status: Status
+    type: string
 
     @Prop({ required: true })
     date: EventDate

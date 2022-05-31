@@ -15,10 +15,27 @@ import { Event } from './event.entity';
 
 export class JoinEvent {
 
-    @Prop({ ref: () => Event, required: true })
-    event: Ref<Event>;
+    // @Prop({ ref: () => Event, required: true })
+    // event: Ref<Event>;
 
-    @Prop({ ref: () => User, required: true })
-    user: Ref<User>;
+    // @Prop({ ref: () => User, required: true })
+    // user: Ref<User>;
+    @Prop({ required: true, trim: true })
+    email: string;
+
+    @Prop({ required: true, trim: true })
+    phone: string;
+
+    @Prop({ required: true, trim: true })
+    first_name: string;
+
+    @Prop({ required: false, trim: true })
+    last_name: string;
+
+    @Prop({ required: true, trim: true })
+    age: string;
+
+    @Prop({ required: true, trim: true })
+    type: string;
 
 }

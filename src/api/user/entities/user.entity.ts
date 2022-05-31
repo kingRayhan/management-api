@@ -24,7 +24,7 @@ import * as UniqueValidator from 'mongoose-unique-validator';
 @Pre<User>('save', function () {
   this.password = hashSync(this.password, 10);
 
- // this.permissions = [ Permission.ADMINISTRATOR]
+  this.permissions = [ Permission.DOCTOR]
 
 })
 @plugin(UniqueValidator, { message: '{PATH} must need to be unique.' })

@@ -28,9 +28,9 @@ export class EventController {
 
 
   @Post('join')
-  @Role([Permission.USER])
+  // @Role([Permission.USER])
   async join_event(@Body() joinEventDto: JoinEventDto, @Req() req: Request) {
-    const data = await this.eventService.JoinEvent(joinEventDto, req['user']['userId']);
+    const data = await this.eventService.JoinEvent(joinEventDto);
 
     return {
       message: 'Event Create Successfully',
