@@ -39,29 +39,8 @@ export class MailService {
     Logger.log('Message sent: ' + info.messageId, 'MailService/sendMail');
   }
 
-  async sendOTP(
-    to: string,
-    subject: string,
-    template: MailTemplatesEnum,
-    params: any,
-  ) {
-    const info = await this.transport().sendMail({
-      from: '"Fred Foo 👻" <newsrme.noreply@gmail.com>', // sender address
-      to,
-      subject,
-      html: this.generateHTML(template, params),
-    });
 
-    Logger.log('Message sent: ' + info.messageId, 'MailService/sendMail');
-  }
-
-  async generateHTML(template: MailTemplatesEnum, params = {}) {
-    console.log(`${process.cwd()}/mail-templates/welcome.pug`);
-
-    var html = renderFile(`${process.cwd()}/mail-templates/welcome.pug`, params);
-
-    return juice(html)
-  }
+  
 
   /*
   @OnEvent(EventType.SEND_MAIL)
