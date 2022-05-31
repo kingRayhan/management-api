@@ -3,7 +3,7 @@ import { createTransport } from 'nodemailer';
 import { renderFile } from 'pug';
 import * as juice from 'juice';
 import { ConfigService } from '@nestjs/config';
-import { MailTemplatesEnum } from './enum/mail-templates.enum';
+
 
 export type MAIL_TEMPLATE = 'base' | 'resetPassword' | 'welcome' | 'OTP';
 
@@ -38,18 +38,4 @@ export class MailService {
 
     Logger.log('Message sent: ' + info.messageId, 'MailService/sendMail');
   }
-
-
-  
-
-  /*
-  @OnEvent(EventType.SEND_MAIL)
-  listenSendMailEvent(event: SendMailEvent) {
-    this.sendMail(event.to, event.subject, event.template, event.params);
-  }
-
-  @OnEvent(EventType.OTP_MAIL)
-  listenOTPMailEvent(event: OTPMailEvent) {
-    this.sendMail(event.to, event.subject, event.template, event.params);
-  }*/
 }
