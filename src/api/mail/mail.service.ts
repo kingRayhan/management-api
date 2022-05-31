@@ -13,12 +13,12 @@ export class MailService {
 
   private transport() {
     return createTransport({
-      host: this.config.get('SMTP_HOST'),
-      port: this.config.get('SMTP_PORT'),
+      host: 'smtp.mailtrap.io',
+      port: '2525',
       secure: false, // true for 465, false for other ports
       auth: {
-        user: this.config.get('SMTP_USER'), // generated ethereal user
-        pass: this.config.get('SMTP_PASSWORD'), // generated ethereal password
+        user: 'bfa16f1090f69c', // generated ethereal user
+        pass: '95cf59f7d0bb24', // generated ethereal password
       },
     });
   }
