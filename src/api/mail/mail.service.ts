@@ -29,8 +29,6 @@ export class MailService {
     template,
     params: any,
   ) {
-    console.log('object');
-    console.log('sesd',to);
     const info = await this.transport().sendMail({
       from: '"Fred Foo 👻" <hpm.noreply@gmail.com>', // sender address
       to,

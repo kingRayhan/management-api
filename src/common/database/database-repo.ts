@@ -109,7 +109,7 @@ export default class DatabaseRepository<ModelRef> {
 
   async cascadeDelete(filter?: FilterQuery<ModelRef>){
    const deleteDoc =  await this.model.deleteMany(filter)
-   console.log(deleteDoc);
+
    return deleteDoc;
   }
 
