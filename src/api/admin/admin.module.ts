@@ -5,9 +5,11 @@ import { AdminService } from './admin.service';
 import { AdminController } from './admin.controller';
 import { Admin } from './entities/admin.entity';
 import { SessionModule } from '../session/session.module';
+import { UserModule } from '../user/user.module';
+import { RoleModule } from '../role/role.module';
 
 @Module({
-  imports: [TypegooseModule.forFeature([Admin]), SessionModule],
+  imports: [TypegooseModule.forFeature([Admin]), SessionModule, UserModule, RoleModule],
   controllers: [AdminController],
   providers: [AdminService]
 })

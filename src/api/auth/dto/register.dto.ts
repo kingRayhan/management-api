@@ -8,43 +8,15 @@ import {
   IsUrl,
   MinLength,
 } from 'class-validator';
+import { ParentRegisterDTO } from './parent.dto';
 
-export class RegisterDTO {
+export class RegisterDTO extends ParentRegisterDTO {
  
-
   @ApiProperty()
-  @IsNotEmpty()
-  first_name: string;
+  @IsOptional()
+  expertise?: string;
 
   @ApiProperty()
   @IsOptional()
-  last_name: string;
-
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
-
-  @ApiProperty()
-  @IsOptional()
-  phone: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  expertise: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  certificate_no: string;
-
-  @ApiProperty()
-  @MinLength(6)
-  password: string;
-
-  // @ApiProperty()
-  // @IsOptional()
-  // is_verified: string;
-
-
+  certificate_no?: string;
 }

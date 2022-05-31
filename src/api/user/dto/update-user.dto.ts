@@ -29,4 +29,8 @@ export class UpdateUserDto {
     @ApiProperty()
     @IsOptional()
     certificate_no?: string
+
+    @ApiProperty()
+    @IsOptional()
+    is_verified: boolean;
 }

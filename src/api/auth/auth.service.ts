@@ -6,6 +6,7 @@ import {
 import bcrypt from 'bcryptjs';
 import { SessionService } from '../session/session.service';
 import { UserService } from '../user/user.service';
+import { AdminDto } from './dto/admin-register.dto';
 import { LoginDTO } from './dto/login.dto';
 import { RegisterDTO } from './dto/register.dto';
 @Injectable()
@@ -21,6 +22,10 @@ export class AuthService {
    * @returns
    */
   registerUser(dto: RegisterDTO) {
+    return this.userService.create(dto);
+  }
+
+  adminRegister(dto:AdminDto){
     return this.userService.create(dto);
   }
 

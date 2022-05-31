@@ -18,18 +18,4 @@ export class CommonListQueryDto {
   @IsOptional()
   fields: string;
 
-  @ApiProperty({
-    required: false,
-    description: 'See Documentation for filter property',
-  })
-  @IsOptional()
-  filter?: string;
-
-  @ApiProperty({
-    required: false,
-    description:
-      'Aggregate foreign keys for embedding relational data. See Documentation for aggregate property',
-  })
-  @IsOptional()
-  aggregate?: string;
 }

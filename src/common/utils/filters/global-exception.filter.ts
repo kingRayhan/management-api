@@ -20,8 +20,6 @@ export default class GlobalExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    console.log('GlobalExceptionFilter');
-
     return response.status(status).json({
       test: status,
       message: 'Custom formatted exception',

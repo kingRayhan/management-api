@@ -20,22 +20,46 @@ import { hashSync } from 'bcryptjs';
 import * as JWT from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { OTPException } from '@/common/exceptions/otp.exception';
-
-
 import { ResetPasswordDto } from '../auth/dto/reset.dto';
+import { CommonListQueryDto } from '@/common/dtos/pagination.dto';
+import DatabaseRepository from '@/common/database/database-repo';
 const config = new ConfigService();
 @Injectable()
 export class UserService {
+
+  private databaseRepository: DatabaseRepository<User>
+
   constructor(
     @InjectModel(User)
     private readonly model: ReturnModelType<typeof User>,
     private readonly sessionService: SessionService
-  ) {}
+  ) {
+    this.databaseRepository = new DatabaseRepository<User>(this.model);
+  }
 
   async create(createUserDto: CreateUserDto) {
 
     const user = await this.model.create(createUserDto);
     return user;
+  }
+
+
+
+  /**
+   * Find All Users
+   * 
+   * @returns User
+   */
+
+  findAll(query: CommonListQueryDto){
+    return this.databaseRepository.getObjectList(
+      {
+        page: query.page,
+        limit: query.limit,
+        sort: query.sort,
+        fields: query.fields,
+      }
+    );
   }
 
 

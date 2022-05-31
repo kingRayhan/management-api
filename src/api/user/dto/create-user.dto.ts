@@ -1,3 +1,4 @@
+import { Permission } from '@/api/role/enum/permissions.enum';
 import { DOB } from '@/common/dtos/dob.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import {
@@ -5,6 +6,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsUrl,
+  IsEnum,
   MinLength,
 } from 'class-validator';
 
@@ -29,16 +31,21 @@ export class CreateUserDto {
   phone: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  expertise: string;
+  @IsOptional()
+  expertise?: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  certificate_no: string;
+  @IsOptional()
+  certificate_no?: string;
 
   @ApiProperty()
   @MinLength(6)
   password: string;
+
+  @ApiProperty({ enum: Permission, isArray: true })
+  @IsOptional()
+  @IsEnum(Permission, { each: true })
+  permissions?: Permission[];
 
   // @ApiProperty()
   // @IsOptional()
