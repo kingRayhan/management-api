@@ -1,5 +1,3 @@
-
-
 import { join } from 'path';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
@@ -9,7 +7,6 @@ import { AppModule } from '@/app.module';
 import * as cowSay from 'cowsay';
 import { ConfigService } from '@nestjs/config';
 import { ClassValidatorPipe } from '@/common/utils/pipes/ClassValidatorPipe';
-
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -31,8 +28,6 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, document);
 
   await app.listen(8080);
-
-  
 
   const cow = cowSay.say({
     text: `Server running`,

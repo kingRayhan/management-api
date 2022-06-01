@@ -24,7 +24,6 @@ import { toMongooseObjectId } from '@/common/helper/global-helper';
 import { Throttle } from '@nestjs/throttler';
 import { CommonListQueryDto } from '@/common/dtos/pagination.dto';
 
-
 @ApiTags('Article')
 @Controller('articles')
 export class ArticleController {
@@ -61,9 +60,7 @@ export class ArticleController {
   }
 
   @Get(':identifier')
-  async findOne(
-    @Param('identifier') identifier: string,
-  ) {
+  async findOne(@Param('identifier') identifier: string) {
     const data = await this.articleService.findOne(identifier);
     return new Response({
       data,

@@ -14,23 +14,24 @@ import { CommentModule } from './api/comment/comment.module';
 
 @Module({
   imports: [
-
     ThrottlerModule.forRoot(),
-    TypegooseModule.forRoot('mongodb+srv://shuvro:shuvro@cluster0.edtjn.mongodb.net/?retryWrites=true&w=majority'),
+    TypegooseModule.forRoot(
+      'mongodb+srv://shuvro:shuvro@cluster0.edtjn.mongodb.net/?retryWrites=true&w=majority',
+    ),
     ConfigModule.forRoot({
       envFilePath: ['.env.dev', '.env.prod'],
       isGlobal: true,
     }),
     AuthModule,
     UserModule,
-   // RoleModule,
+    // RoleModule,
     SessionModule,
-   AdminModule,
-   EventModule,
-   ArticleModule,
-   CommentModule
+    AdminModule,
+    EventModule,
+    ArticleModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
