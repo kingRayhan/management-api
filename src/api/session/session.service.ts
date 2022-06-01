@@ -86,17 +86,17 @@ export class SessionService {
 
     const access_token = jwtSign(
       { sub: userId, session_id },
-      config.get('APP_SECRET'),
+      'base64:dFAXRrHxfcrnPIEuK1TGmwrG638BHC2a2rB9fqHFMco=',
       {
-        expiresIn: config.get('ACCESS_TOKEN_EXPIRATION'),
+        expiresIn: '7d',
       },
     );
 
     const refresh_token = jwtSign(
       { sub: userId, refresh_token_secret },
-      config.get('RT_SECRET'),
+      'base64:bO6AXxWEv48KFqE6GVC3hrU9fuhgcDGmYi7DbN01WA4=',
       {
-        expiresIn: config.get('REFRESH_TOKEN_EXPIRATION'),
+        expiresIn: '7d',
       },
     );
 

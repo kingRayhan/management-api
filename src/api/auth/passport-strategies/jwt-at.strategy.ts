@@ -20,7 +20,7 @@ export class JwtAccessTokenStrategy extends PassportStrategy(
         ExtractJwt.fromUrlQueryParameter('access_token'),
         ExtractJwt.fromBodyField('access_token'),
       ]),
-      secretOrKey: config.get<string>('APP_SECRET'),
+      secretOrKey: 'base64:dFAXRrHxfcrnPIEuK1TGmwrG638BHC2a2rB9fqHFMco=',
       ignoreExpiration: false,
     });
   }
