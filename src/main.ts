@@ -3,7 +3,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppModule } from '@/app.module';
+import { AppModule } from './app.module';
 import * as cowSay from 'cowsay';
 import { ConfigService } from '@nestjs/config';
 import { ClassValidatorPipe } from '@/common/utils/pipes/ClassValidatorPipe';
